@@ -1,0 +1,24 @@
+
+/*
+ * @author Alexander Burgess
+ * @version 2/7/2018
+ * Description: 
+ * 
+ * Pseudocode: [Steps of the program]
+ * Import Scanner
+ * Name class
+ * Name class for scanner input
+ * Declare variable for pounds (double type for broader input options)
+ * Prompt user for input
+ * Initialize input as value for pounds
+ * Declare and initialize variable for kilograms
+ * Displays equivalent value in kilograms 
+ */
+import java.util.Scanner;
+public class PostLab2_3 {
+    public static void main(String[] args) {
+    	System.out.println("ID003");
+    Scanner input = new Scanner(System.in);
+    
+    }
+}

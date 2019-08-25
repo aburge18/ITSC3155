@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+/*
+ * @author Alexander Burgess
+ * @version 2/7/2018
+ * Description: This program is intendend to convert a number of pounds
+ * into the equivalent number of kilograms based on user input.
+ * 
+ * Pseudocode: [Steps of the program]
+ * Import Scanner
+ * Name class
+ * Name class for scanner input
+ * Declare variable for pounds (double type for broader input options)
+ * Prompt user for input
+ * Initialize input as value for pounds
+ * Declare and initialize variable for kilograms
+ * Displays equivalent value in kilograms 
+ */
+public class PostLab2_1 {
+    public static void main(String[] args) {
+    	System.out.println("ID001");
+    Scanner input = new Scanner(System.in);
+ double pounds;
+ 		System.out.println("How many pounds would you like to convert to kilograms?");
+ 	pounds = input.nextDouble();
+double kilograms = pounds*.454;
+		System.out.println(pounds + " pounds is equivalent to " + kilograms + " kilograms.");
+    }
+}

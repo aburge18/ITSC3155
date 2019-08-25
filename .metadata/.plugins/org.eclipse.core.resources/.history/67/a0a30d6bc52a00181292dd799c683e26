@@ -1,0 +1,114 @@
+/*
+ * @author Alexander Burgess
+ * @version 3/18/2018
+ * Description: This program is intended to gather the month and day of the user's birth and return the user's zodiac
+ * sign using a series of if else statements, known date ranges and relational operators
+ * Pseudocode: [Steps of the program]
+ * Import Scanner
+ * Name class
+ * Name class for scanner input
+ * Ask user for month of birth in form of integer from 1-12
+ * Declare, Scan, and initialize user input as the month variable
+ * Ask user for day of birth in form of integer from 1-31
+ * Declare, scan and intialize user input as the day variable
+ * Use if else statements, the known date ranges for zodiac signs and a combination of relational operators to determine user's zodiac sign
+ * if else statements print the user's sign and a fun fact about it. 
+ */
+import java.util.Arrays;
+import java.util.Scanner;
+public class ASSIGNMENT2 {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+	System.out.println("Please enter a main sentence:");
+	
+	String s = input.next();
+	
+	System.out.println("(A) Enter a new main sentence");
+	
+	System.out.println("(B) Find a String");
+	
+	System.out.println("(C) Find all incident of a String");
+	
+	System.out.println("(D) Find and Replace a String");
+	
+	System.out.println("(E) Replace all incidents of a String");
+	
+	System.out.println("(F) Count the number of words");
+	
+	System.out.println("(G) Count a letter's occurences");
+	
+	System.out.println("(H) Count the total number of letters");
+	
+	System.out.println("(I) Delete all the occurences of a word");
+	
+	System.out.println("(J) Exit");
+	
+	System.out.println("Please enter your selection:");
+	
+	String selec = input.next();
+	
+    switch (selec) {
+    case "A":
+       System.out.println("Please enter a new main sentence:");
+       s = input.next();
+       System.out.println("Please enter a new menu selection:");
+       selec = input.next();
+        break;
+  
+    case "B":
+    	System.out.println("Enter a keyword to search for:");
+    	String keyword = input.next();
+    	
+   
+    case "C":
+     
+        break;
+   
+    case "D":
+       
+        break;
+   
+    case "E":
+    	System.out.println("Please enter the string you would like to be replaced:");
+    	String s1 = input.next();
+    	System.out.println("Please enter the string you would like to replace it with:");
+    	String s2 = input.next();
+    	String replaceString=s.replace(s1,s2);
+    	System.out.println("The updated string is: " + replaceString);
+        break;
+  
+    case "F":
+    	
+    	int wordcount = 0;
+    	
+    	
+    	for(int i=0; i<s.length()-1; i++)
+        {
+            if(s.charAt(i)==' ' && s.charAt(i+1)!=' ')
+                wordcount++;
+        }
+    	System.out.println("The word count of the string is: " + wordcount);
+        break;
+   
+    case "G":
+      
+        break;
+    
+    case "H":
+      
+        break;
+   
+    case "I":
+    	System.out.println("Please enter a char sequence you would like deleted from the sentence:");
+    	String sequence1 = input.next();
+    	String replaceString1=s.replace(sequence1,"");
+    	System.out.println("The updated sentence is: " + replaceString1);
+        break;
+   
+    case "J":
+        System.out.println("Goodbye!");
+        break;
+   
+}
+	}
+}

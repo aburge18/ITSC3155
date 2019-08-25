@@ -1,0 +1,487 @@
+import java.util.Scanner;
+
+import java.util.Arrays;
+
+public class Assignment4 {
+	
+	static Scanner input = new Scanner(System.in);	
+	
+	static boolean[][] exploredWorld;
+
+	static String[] observedAnimals;
+	
+	public static void main(String[] args) {	
+	
+		 boolean loop = true;
+	  
+		System.out.println("Welcome to the jungle creator!\nIn this game, you will be inserting animals in certain places in the world\nthat you create! You will also be allowed to remove animals from certain locations before you start exploring!\nOnce you start exploring you will navigate around the world to observe the animals you have inserted.\nThe game will keep track of all the animals you have observed!");
+	    
+	  System.out.println("Enter the dimensions of your custom jungle.");
+	
+	  System.out.print("Enter desired length of your jungle:");
+	 
+	  int length = input.nextInt();
+	 
+	    System.out.print("Enter desired width of your jungle:");
+	  
+	    int width = input.nextInt();
+	   
+	    String[][] visibleWorld = new String[length][width];
+	    
+	    visibleWorld = makeWorld(visibleWorld, 0, 0);
+	    
+	    observedAnimals = new String[length*width];
+	    
+	    String[][] locations = new String[length][width];
+	    
+	    locations = populateAnimals(locations);
+	   
+	    int select;
+	   
+	    do
+	    {
+	    
+	    printMainMenu();
+	
+	    select  = input.nextInt();
+	   
+	      switch (select) {
+	   
+	      case 1: 
+	       
+	    	  insertAnimalToWorld(locations);
+	        
+	    	  break;
+	    
+	      case 2: 
+	       
+	    	  removeAnimalFromWorld(locations);
+	        
+	    	  break;
+	    
+	      case 3: 
+	       
+	    	  explore(visibleWorld,observedAnimals, locations);
+	       
+	        loop=false;
+	        
+	        break;
+
+	      default: 
+	        
+	    	  System.out.println("Invalid Option");
+	      
+	      }
+	      
+	  } while (loop);
+	  
+	}
+	  
+	    
+
+	public static String[][] makeWorld(String[][] world,int posX, int posY)
+	  {
+	    for (int x = 0; x < world.length; x++) {
+ 
+	    	for (int y = 0; y < world[x].length; y++) {
+	         
+	   if ((x != posX) || (y != posY)) {
+	    
+	        	  if (!isExplored(x, y)) {
+	              
+	        		  world[x][y] = "*";
+	            } 
+	        	  else {
+	             
+	        		  world[x][y] = "O";
+	            }
+	            
+	        }
+	          else {
+	           
+	        	  world[x][y] = "x";
+	        }
+	        }
+	        }
+	      
+	    return world;
+	  
+	  }
+	
+	 public static void makeExploredWorld (int posX, int posY) {
+		
+		 for (int x = 0; x < exploredWorld.length; x++) {
+		    
+			 for (int y = 0; y < exploredWorld[x].length; y++) { 
+		    
+				 if ((x != posX) || (posY != y)) {
+		         
+					 exploredWorld[x][y] = false;} 
+				 
+				 else if ((x == posX) && (y == posY)) {
+		             
+					 exploredWorld[x][y] = true;
+					 
+	}
+	}
+	 }
+	 }
+	
+	 public static String[][] populateAnimals (String[][] Locations)
+	  {
+	   int animalPop = (int)(Math.random() *100);
+		 String[] animals = { "Tiger", "Cheetah", "Panther", "Sloth", "Anaconda", "Unicorn", "Koala", "Feral Dog", "Cannabilistic Aboriginal", "Eagle", "Hawk", "Crocodile", "Marauding Bear", "Gazelle", "Army of mosquitoes" };
+
+	    for (int i = 0; i < animalPop; i++) {
+	   
+	    	int species = (int)(Math.random() * animals.length);
+	    
+	      int x = (int)(Math.random() * Locations.length);
+	    
+	      int y = (int)(Math.random() * Locations[x].length);
+	    
+	      while (!isEmptyBlock(Locations, x, y)) {
+	     
+	    	x = (int)(Math.random() * Locations.length);
+	       
+	    	y = (int)(Math.random() * Locations[x].length);
+	      }
+	      Locations[x][y] = animals[species];
+	    }
+	    
+	    return Locations;
+	  }
+	 
+	 public static void printMainMenu()
+	
+	 {
+	    System.out.println("1. Insert an animal into the world");
+	   
+	    System.out.println("2. Remove an animal from the world");
+	 
+	    System.out.println("3. Explore the world");
+	    
+	    System.out.print("Enter your choice: ");
+	  }
+	  
+	  public static void printMoveMenu()
+	  {
+	    System.out.println("W. Move Forward");
+	    
+	    System.out.println("A. Move Left");
+	    
+	    System.out.println("S. Move Backward");
+	    
+	    System.out.println("D. Move Right");
+	    
+	    System.out.println("I. Display observed animals");
+	    
+	    System.out.println("N. Sort the observed animals list by alphabetical order");
+	    
+	    System.out.println("E. Exit");
+	    
+	    System.out.print("Enter your choice: ");
+	  }
+	  
+
+	  public static void insertAnimalToWorld(String[][] Locations)
+	  {
+		  int x;
+		   
+		  int y;
+		  
+		  boolean loop = true;
+		  
+		  String animal;
+		  
+		  do
+		    {
+		      System.out.print("Enter the species of animal you would like to place: ");
+		      
+		      animal = input.next();
+		     
+		      System.out.print("Enter the x-coordinate of the animal you would like to place:");
+		     
+		      x = input.nextInt();
+		     
+		      System.out.print("Enter the y-coordinate of the animal you would like to place:");
+		    
+		      y = input.nextInt();
+	  
+		  if (y < 0 || x < 0 || (x >= Locations.length) || (y >= Locations[x].length)) {
+		       
+			  System.out.println("Outside the bounds of the jungle");
+
+		      }
+		     
+		  else if (!isEmptyBlock(Locations, x, y)) {
+		       
+		    	  System.out.println("This location is currently occupied by another animal");
+		        
+		    	  loop = true;
+		      } 
+		      
+		      else {
+		       
+		    	  if (isEmptyBlock(Locations, x, y)) {
+		          
+		    		  break;
+		        
+		    	  }    
+		      }
+		    }
+		    
+		  while ((y < 0 || x < 0 || (x >= Locations.length) || (y >= Locations[x].length)));
+		    
+		  Locations[x][y] = animal;
+		  
+	  }
+	  
+
+		  
+	
+	  public static void removeAnimalFromWorld(String[][] Locations)
+	  {
+		  int x;
+		  
+		  int y;
+		   
+		  boolean loop = true;
+		   
+		  do
+		    {
+		  
+		    System.out.print("Enter the x-coordinate of the animal you would like to remove: ");
+		    
+		    x = input.nextInt();
+		    
+		    System.out.print("Enter the y-coordinate of the animal you would like to remove: ");
+		    
+		    y = input.nextInt();
+		    
+		    if ((y < 0 || x < 0 || (x >= Locations.length) || (y >= Locations[x].length))) {
+		        
+		    	System.out.println("Outside the bounds of the jungle");
+
+		        }
+		       
+		    else if (isEmptyBlock(Locations, x, y)) {
+		    
+		    	System.out.println("There is no animal currently occupying that location");
+		        
+		    	loop = true;
+		        } 
+		    
+		    else {
+		    
+		    	if (!isEmptyBlock(Locations, x, y)) {
+		        
+		    		break;
+		        
+		    	}
+		    	
+		          
+		        }
+		      } while ((y < 0 || x < 0 || (x >= Locations.length) || (y >= Locations[x].length)) || (loop));
+		      
+		      Locations[x][y] = "";
+		    }
+		    
+		
+	  
+	  public static boolean isEmptyBlock(String[][] world, int x, int y) {
+	    
+		  return world[x][y].equals("");
+	 
+	  }
+	  
+	  public static String[] updateobservedAnimals(String[] observedAnimals, String animal){
+		  
+		  return observedAnimals;
+	 
+	  }
+	  
+	  public static void printWorld(String[][] world){
+	  
+		  for (int i = 0; i < world.length; i++) {
+	       
+	    System.out.print(world[i] + " ");
+	      
+	    System.out.println();
+	   
+	    }
+	    
+	  }
+	  
+	  public static String[][] move(String[][] world, int x, int y, String[] observedAnimals, String[][] Locations){
+	
+		  return world;
+		
+	  }
+	  
+	  
+	  public static void explore(String[][] world, String[] observedAnimals, String[][] Locations) {
+ 
+		  boolean loop = true;
+		  
+		  char select;
+		 
+		  int posX=0;
+		  
+		  int posY=0;
+		  
+		  System.out.println("Welcome to your custom jungle! You may now explore the area freely");
+		  
+		  printWorld(world);
+		
+		  do
+		    
+		  {
+		     
+			  printMoveMenu();
+		   
+		      select = input.next().toUpperCase().charAt(0);
+		   
+		      switch (select) {
+		   
+		      case 'w': 
+		    
+		    	  posX--;
+		      
+		        if ((posX < 0) || (posY < 0) || (posX >= world.length) || (posY >= world[posX].length)) {
+		       
+		        	posX = 0;
+		    
+		          posY = 0;
+		        
+		          System.out.println("You've left the bounds of your jungle. Position reset to (0,0)");
+		    
+		        }
+		     
+		        world = move(world, posX, posY, observedAnimals,Locations);
+		      
+		        printWorld(world);
+		       
+		        break;
+		      
+		      case 'a': 
+		      
+		    	  posY--;
+		     
+		    	  if ((posX < 0) || (posY < 0) || (posX >= world.length) || (posY >= world[posX].length)) {
+		     
+		    		  posX = 0;
+		       
+		    		  posY = 0;
+		          
+		    		  System.out.println("You've left the bounds of your jungle. Position reset to (0,0)");
+		      
+		    	  }
+		    	  
+		        world = move(world, posX, posY, observedAnimals,Locations);
+		      
+		        printWorld(world);
+		     
+		        break;
+		    
+		      case 'd': 
+		    
+		    	  posY++;
+		    
+		        if ((posX < 0) || (posY < 0) || (posX >= world.length) || (posY >= world[posX].length)) {
+		      
+		        	posX = 0;
+		      
+		          posY = 0;
+		          
+		          System.out.println("You've left the bounds of your jungle. Position reset to (0,0)");
+		     
+		        }
+		      
+		        world = move(world, posX, posY, observedAnimals, Locations);
+		     
+		        printWorld(world);
+		        
+		        break;
+		     
+		      case 's': 
+		        
+		    	  posX++;
+		        
+		    	  if ((posX < 0) ||(posY < 0) || (posX >= world.length) ||  (posY >= world[posX].length)) {
+		          
+		        	posX = 0;
+		          
+		          posY = 0;
+		       
+		          System.out.println("You've left the bounds of your jungle. Position reset to (0,0)");
+		        }
+		     
+		        world = move(world, posX, posY, observedAnimals,Locations);
+		      
+		        printWorld(world);
+		        
+		        break;
+		    
+		      case 'i': 
+		      
+		    	System.out.println("Printing observed animals...");
+		      
+		        printobservedAnimals(observedAnimals);
+		     
+		        break;
+		    
+		      case 'n': 
+		       
+		    	  System.out.println("Sorting observed animals...");
+		       
+		        sortAnimalList(observedAnimals);
+		        
+		        System.out.println("Printing observed animals...");
+		        
+		        printobservedAnimals(observedAnimals);
+		        
+
+		        break;
+		     
+		      case 'e': 
+		      
+		    	  System.out.println("Exiting Jungle...");
+		        
+		    	  loop=false;
+		        
+		    	  break;
+		      
+		      default: 
+		       
+		    	  System.out.println("Invalid Input");
+		     
+		      }
+		      
+		    } while (loop);
+		  
+	  }
+	  
+	  public static void printobservedAnimals(String[] observedAnimals){
+		 
+		  for (int i = 0; i < observedAnimals.length; i++)
+		    {
+		        System.out.print(observedAnimals[i] + " ");
+		    }
+		    System.out.println();
+	  }
+	  
+	  
+	  public static boolean isExplored(int x, int y){
+	    
+		  return exploredWorld[x][y];
+	
+	  }
+	  
+	  public static void sortAnimalList(String[] observedAnimals) {
+		  
+		  int n = observedAnimals.length;
+	  
+	  }
+	  
+}

@@ -1,0 +1,399 @@
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.util.Scanner;
+/**
+ * Write a really good Description on how you understand this algorithm. The Description should briefly describe
+ * on how the program is running to what it should do.
+ *
+ * @author Alexander Burgess
+ * @version 4/22/2018
+ */
+public class ASSIGNMENT03 {
+	
+	static Scanner input = new Scanner(System.in);
+	
+	//You can use a static scanner if you want or you can declare scanner in individual methods.
+	//Static Scanner is beneficial as it will save you time in declaring the Scanner again and again
+	//You can also use your static String arrays or ArrayLists here. 
+	//Using them here will make them "global" variables which means you can use these arrays anywhere in your code!
+
+	public static char menu() {
+		System.out.println("Select one of the following options\n");
+		System.out.println("A. Make a log");
+		System.out.println("B. View all logs for my previous expenses");
+		System.out.println("C. View all logs for deposits");
+		System.out.println("D. View all logs for a particular month");
+		System.out.println("E. View Customized logs for a particular month");
+		System.out.println("F. View all logs for a particular day");
+		System.out.println("G. View Customized logs for a particular day");
+		System.out.println("H. View all logs for a particular previous expenses");
+		System.out.println("I. View all logs for a particular previous deposits");
+		System.out.println("J. View all logs till date");
+		System.out.println("Q. Quit");
+		
+		return input.next().charAt(0);
+	}
+	
+	/**
+	 * @description: This method reads in the file logs.txt and loops through every line in the file.
+	 * It stores each date in the date String array/ArrayList, as well as each transaction type,
+	 * category, amount and updated balance into a new separate array/ArrayList. You will be using these arrays/ArrayLists as parallel arrays.
+	 * Hint: use option J for reference!
+	 */
+	public static void readFile(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException{
+				
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+
+		
+		
+				String line = br.readLine();
+
+				while ( line != null) {
+
+					for(int i=0; i< 140; i++) {
+					
+					StringTokenizer st = new StringTokenizer(line);
+					
+					String date = st.nextToken();
+					String type = st.nextToken();
+					String event = st.nextToken();
+					int amount = Integer.parseInt(st.nextToken());
+					int balance = Integer.parseInt(st.nextToken());
+					
+					date1 [i] = date;
+					type1 [i] = type;
+					event1 [i] = event;
+					amount1 [i] = amount;
+					balance1 [i] = balance;
+					
+					if (type1[i].equals("Expense")){
+						System.out.println(date1[i] + " \t" + type1[i] + " \t" + event1[i] + " \t" + amount1[i] + " \t" + balance1[i]);
+	}
+		}
+	}
+	}
+	public static void optionA(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+
+		System.out.println("You chose to make a log. Please select one of the following option");
+		System.out.println("1. Log an expense");
+		System.out.println("2. Log a Deposit");
+	
+		 char choice = input.next().charAt(0);
+		    
+		    if (choice == '1') {
+		    	
+		      System.out.println("You chose to log an expense");
+		    } 
+		    
+		    else if (choice == '2') {
+		     
+		    	System.out.println("You chose to log a deposit");
+		    } 
+		    
+		    else {
+		      System.out.println("Invalid Choice");
+		    }
+		
+        FileWriter fileWriter =
+            new FileWriter("logs.txt");
+        BufferedWriter bufferedWriter =
+            new BufferedWriter(fileWriter);	
+		
+		System.out.println("Log Succesfully Added\n");
+	}
+
+	public static void optionB(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+
+		System.out.println("You chose to view all logs for expenses");
+		
+		for(int i=0; i< 140; i++) {
+			
+			if (type1[i].equals("Expense")){
+				System.out.println(date1[i] + " \t" + type1[i] + " \t" + event1[i] + " \t" + amount1[i] + " \t" + balance1[i]);
+	}
+		}
+	}
+
+	public static void optionC(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+
+		System.out.println("You chose to view all logs for deposits");
+		
+		for(int i=0; i< 140; i++) {
+			
+			if (type1[i].equals("Deposit")){
+				System.out.println(date1[i] + " \t" + type1[i] + " \t" + event1[i] + " \t" + amount1[i] + " \t" + balance1[i]);
+	}
+}
+	}
+	public static void optionD(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+
+		System.out.println("You chose to view all logs for particular month. Enter the month you would like to see (1-12)");
+		 int mo = input.nextInt();
+			for(int i=0; i< 140; i++) {
+		  if (mo == Integer.parseInt(date1[i].substring(0, date1[i].indexOf('/')))) {
+			  System.out.println(date1[i] + " \t" + type1[i] + " \t" + event1[i] + " \t" + amount1[i] + " \t" + balance1[i]);
+	}
+	}
+	}
+	public static void optionE(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+		
+		System.out.println("You chose to view customized logs for a particular month. Enter the month: ");
+		 System.out.println("You chose to view customized logs for a particular month. Enter the month: ");
+		    int mo = input.nextInt();
+		    System.out.println("");
+		    System.out.println("Please select one of the following option");
+		    System.out.println("1. View Expense");
+		    System.out.println("2. View Deposit");
+		    System.out.println("3. Both");
+		    String str = "";
+		    String comp = "";
+		    switch (input.nextInt()) {
+		    case 1: 
+		      str = "Expense";
+		      System.out.println("Please select which Expense you want to see for the particular month");
+		      System.out.println("1. Food");
+		      System.out.println("2. Entertainment");
+		      System.out.println("3. Academic");
+		      System.out.println("4. Other");
+		      System.out.println("5. All");
+		      
+		      switch (input.nextInt())
+		      {
+		      case 1: 
+		        comp = "Food";
+		        break;
+		      case 2: 
+		        comp = "Entertainment";
+		        break;
+		      case 3: 
+		        comp = "Academic";
+		        break;
+		      case 4: 
+		        comp = "Other";
+		        break;
+		      case 5: 
+		        comp = "";
+		      }
+		      
+		      break;
+		    case 2: 
+		      str = "Deposit";
+		      System.out.println("Please select which Expense you want to see for the particular month");
+		      System.out.println("1. Salary");
+		      System.out.println("2. Dad_Sent_Some");
+		      System.out.println("3. Tutoring");
+		      System.out.println("4. All");
+		      switch (input.nextInt())
+		      {
+		      case 1: 
+		        comp = "Salary";
+		        break;
+		      case 2: 
+		        comp = "Dad_Sent_Some";
+		        break;
+		      case 3: 
+		        comp = "Tutoring";
+		        break;
+		      case 4: 
+		        comp = "";
+		      }
+		      
+		      break;
+		    case 3: 
+		      str = "";
+		      comp = "";
+		    }
+		    for(int i=0; i< 140; i++) {
+		    if ((type1[i].contains(str)) && (event1[i].contains(comp)) && (mo == Integer.parseInt(date1[i].substring(0, date1[i].indexOf('/'))))) {   
+		    
+		    	System.out.println(date1[i] + " \t" + type1[i] + " \t" + event1[i] + " \t" + amount1[i] + " \t" + balance1[i]);
+	}
+		    }
+	}
+
+	public static void optionF(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+		System.out.println("You chose to view all logs for particular month. Enter the month you would like to see (1-12)");
+		//Take the user input for month
+		System.out.println("You chose to view all logs for particular month. Enter the month you would like to see (1-31)");
+		//Take the user input for day
+
+		//Write code for Option F here
+	}
+
+	public static void optionG(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+		System.out.println("You chose to view customized logs for a particular month. Enter the month: ");
+		 int mo = input.nextInt();
+		System.out.println("Enter the Day (1-31): ");
+	    int day = input.nextInt();
+	    
+	    for(int i=0; i< 140; i++) {
+	   if ((day == Integer.parseInt(date1[i].substring(0, date1[i].indexOf('/')))) && (mo ==  Integer.parseInt(date1[i].substring(date1[i].indexOf('/') + 1, date1[i].indexOf('/', date1[i].indexOf(47) + 1))))) {
+	        System.out.println(date1[i] + " " + type1[i] + " " + event1[i] + " " + amount1[i] + " " + balance1[i]);
+
+	}
+	    }
+	}
+
+	public static void optionH(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+		System.out.println("You chose to view all logs for a particular Expense. Please select one of the following option");
+		System.out.println("1. Food");
+		System.out.println("2. Entertainment");
+		System.out.println("3. Academic");
+		System.out.println("4. Other");
+		 String comp = "";
+		    switch (input.nextInt())
+		    {
+		    case 1: 
+		      comp = "Food";
+		      break;
+		    case 2: 
+		      comp = "Entertainment";
+		      break;
+		    case 3: 
+		      comp = "Academic";
+		      break;
+		    case 4: 
+		      comp = "Other";
+		    }
+		    for(int i=0; i< 140; i++) {
+		    if (event1[i].equals(comp)) {
+		    System.out.println(date1[i] + " " + type1[i] + " " + event1[i] + " " + amount1[i] + " " + balance1[i]);
+	}
+		    }
+	}
+
+	public static void optionI(String[] date1, String [] type1,String[] event1,int[] amount1, int [] balance1) throws IOException {
+		System.out.println("You chose to view all logs for a particular Deposit. Please select one of the following option");
+		System.out.println("1. Salary");
+		System.out.println("2. Dad_Sent_Some");
+		System.out.println("3. Tutoring");
+		 String comp = "";
+		    switch (input.nextInt())
+		    {
+		    case 1: 
+		      comp = "Salary";
+		      break;
+		    case 2: 
+		      comp = "Dad_Sent_Some";
+		      break;
+		    case 3: 
+		      comp = "Tutoring";
+		    }
+		    
+		    for(int i=0; i< 140; i++) {
+		    if (event1[i].equals(comp) && type1[i].equals("Deposit")) {
+		    System.out.println(date1[i] + " " + type1[i] + " " + event1[i] + " " + amount1[i] + " " + balance1[i]);
+	}
+		    }
+	}
+
+	/**
+	 * This Is the only method given to you. Use this method to understand.
+	 * You can copy paste code from this method to any other methods.
+	 * However, if you do copy, make sure that you have necessary tweaks / addition / changes to the code
+	 * based on what the option wants.
+	 *
+	 * Hint : All the methods in some way is going to use this code given in OptionJ method. By using
+	 * proper conditional statements and user input and proper calculations, correct results for display can be obtained.
+	 *
+	 * @throws IOException
+	 */
+	public static void optionJ() throws IOException {
+
+		//A BufferedReader object is used to read an existing file in the project.
+		//Make sure that the log.txt file is in the Java Project Folder.
+		BufferedReader br = new BufferedReader(new FileReader("logs.txt"));
+
+		//br.readLine() reads the first line from the BufferedReader, assigns it to String line and then deletes it.
+		//This way, we can reach the 2nd line or the nth line by writing br.readLine(); two times or n times.
+		String line = br.readLine();
+
+		//to write a code that reach end of file (n lines)
+		//we say that while line has some string in it. Once at an end, br.readLine returns null if all lines are finished.
+		while (line != null) {
+
+			//String Tokenizer is something that is used to seperate words in a line based on a delimeter
+			//Default delimeter is space and our log.txt file is space delimetered file for each line.
+			StringTokenizer st = new StringTokenizer(line);
+
+			//Since we know that each line has 5 elements to it, we can use that information and assign those 5 strings (Tokens)
+			//And now we have individual Access to data, ie. we can now see the particular line and see the date, type, event, etc and use it for comparison.
+			String date = st.nextToken();
+			String type = st.nextToken();
+			String event = st.nextToken();
+			int amount = Integer.parseInt(st.nextToken());
+			int balance = Integer.parseInt(st.nextToken());
+
+			//This line will be simply printing out the give string. we use \t to make it in a better Format.
+			System.out.println(date + " \t" + type + " \t" + event + " \t" + amount + " \t" + balance);
+
+			//In order to not repeat the process for the same line, we use br.readLine at the end of loop to make sure that it has a next line
+			//and to assign that new line to the variable line and repeat the same process until its value reaches to null.
+			line = br.readLine();
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		System.out.println("Welcome to your daily expense table OUO");
+
+		//Add a suitable looping for this menu. It can be While / Do-while / for loops.
+		//The menu should loop every time after the option execution is over until the user selects Q
+		// Don't forget to re-read the file every time a new loop comes around :)
+		
+		String [] date = new String [142];
+		String [] type = new String [142];
+		String [] event = new String [142];
+		int [] amount = new int [142];
+		int [] balance = new int [142];
+		
+		readFile(date,type,event,amount,balance);
+		
+		   boolean loop = true;
+		    do {
+		      char choice = menu();
+		
+		switch (choice) {
+
+		case 'A':
+			optionA(date,type,event,amount,balance);
+			break;
+		case 'B':
+			optionB(date,type,event,amount,balance);
+			break;
+		case 'C':
+			optionC(date,type,event,amount,balance);
+			break;
+		case 'D':
+			optionD(date,type,event,amount,balance);
+			break;
+		case 'E':
+			optionE(date,type,event,amount,balance);
+			break;
+		case 'F':
+			optionF(date,type,event,amount,balance);
+			break;
+		case 'G':
+			optionG(date,type,event,amount,balance);
+			break;
+		case 'H':
+			optionH(date,type,event,amount,balance);
+			break;
+		case 'I':
+			optionI(date,type,event,amount,balance);
+			break;
+		case 'J':
+			optionJ();
+			break;
+		case 'Q':
+			System.out.println("GoodBye :)");
+			 loop = false;
+			break;
+		default:
+			System.out.println("Invalid Option :(");
+		  }
+	      
+		    } while (loop);
+		  }
+		}	

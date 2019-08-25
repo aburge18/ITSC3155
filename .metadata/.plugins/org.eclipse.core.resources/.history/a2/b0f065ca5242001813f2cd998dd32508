@@ -1,0 +1,16 @@
+public class Test {
+   static boolean[] array ;
+
+    public static void main(String[] args) {
+
+    	int i=5;
+    	 for (int i =0; i<5;i++){ // part A 
+    	       System.out.print(i); //part B 
+    	 }
+    	 System.out.print(i); // part C 
+
+    	// Part D : Does it compile ?
+
+
+}
+}

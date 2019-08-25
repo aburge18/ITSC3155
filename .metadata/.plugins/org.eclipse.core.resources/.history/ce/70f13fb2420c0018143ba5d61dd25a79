@@ -1,0 +1,37 @@
+
+/*
+ * @author Alexander Burgess
+ * @version 2/7/2018
+ * Description: 
+ * 
+ * Pseudocode: [Steps of the program]
+ * Import Scanner
+ * Name class
+ * Name class for scanner input
+ * Declare variable for pounds (double type for broader input options)
+ * Prompt user for input
+ * Initialize input as value for pounds
+ * Declare and initialize variable for kilograms
+ * Displays equivalent value in kilograms 
+ */
+import java.util.Scanner;
+public class PostLab2_3 {
+    public static void main(String[] args) {
+    	System.out.println("ID003");
+    Scanner input = new Scanner(System.in);
+String model; 
+double cost;
+		System.out.println("Enter Car Model:");
+	model = input.toString();
+		System.out.println("Enter Car Initial Cost:");
+	cost = input.nextDouble();
+double tax = cost*.0363;
+double discount = (cost+tax)*.15;
+double finalPrice = (tax+cost)-discount;
+		System.out.println("The car model is a " + model);
+		System.out.println("The initial cost is: " + cost);
+		System.out.println("The sales tax is: " + tax);
+		System.out.println("The discount is: " + discount);
+		System.out.println("The Final Price is: " + finalPrice);
+    }
+}

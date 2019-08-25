@@ -1,0 +1,31 @@
+public class Test {
+   static boolean[] array ;
+
+    public static void main(String[] args) {
+
+             array = new boolean[5]; // part A
+             System.out.println("Intializing global variable");
+             for (int i =0; i<array.length;i++){
+                 System.out.print(array[i]+" ");
+             }
+             System.out.println();
+              array[4]=true; // part B
+             System.out.println("Making a new variable with same name:");
+             boolean [] array={true,true,false}; // part C
+             for (int i =0; i<array.length;i++){
+                  System.out.print(array[i]+" ");
+               }
+              System.out.println();
+ 
+               myMethod();
+
+      }
+
+      public static void myMethod() {
+          System.out.println("Calling the global variable in a method after changing its last element");
+          for (int i =0; i<array.length;i++){
+               System.out.print(array[i]+" "); // part D
+           }
+  }
+
+}

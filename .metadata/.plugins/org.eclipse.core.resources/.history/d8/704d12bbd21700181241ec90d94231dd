@@ -1,0 +1,46 @@
+
+/*
+ * @author Alexander Burgess
+ * @version 2/12/2018
+ * Description: We creating a program that emulates the software of a gaming console by generating a menu with interactive
+ * games that you may choose from and subsequently play through a series of user input, randomnly generated input and if else statements. 
+ * Pseudocode: [Steps of the program]
+ * Import Scanner and Random
+ * Name class
+ * Name class for scanner and random input
+ * Declare variables for main menu selection
+ * Display main menu and user choices and prompt user for selection input 
+ * Choice is initialized
+ * Generate if statements that enable the user to make a unique choice of game to play
+ *(1) Display message introduces user to rock paper scissors and prompts user for a choice and declare variables for user and computer play
+ * Choice is initialized
+ * Computer input is randomnly generated
+ * Rock Paper Scissors if else statements are generated and compared against the user and computer choices
+ * Display messages informs the user if they have won or lost
+ *(2) Display message introduces you to the Guessing Game, declare variables for random number and user guess and prompts the user to choose a number between 1 and 10
+ * user choice is initialized
+ * Computer choice is randomly generated and initialized
+ * If else statements are used to compare user and computer input
+ * Display message informs the user if they have guessed correctly or not. 
+ * (3) Display message introduces you to the simple shop game and inventory choices. Declare variables for menu selection, tax and final price. User is prompted for an item choice and quantity. 
+ * User Choice and Quantity is initialized and computed through the if else statements
+ * Display message informs the customer of the final price after tax and thanks them
+ * (4) Display message introduces you to the Multiplication Game and supplies the user with the multiplication problem (randomnly generated)
+ * declare variables for answer, solution and the two products.
+ * Program prompts the user for their answer to the problem and it is initialized
+ * User answer is compared to solution through if else statements
+ * Display message informs the user whether they were correct or incorrect
+ * (5) Display message tells the user that the console is powering off. 
+ */
+
+	//Import scanner and random classes
+import java.util.Scanner;
+import java.util.Random; 
+public class L04_1 {
+    public static void main(String[] args) {
+    	 Scanner input = new Scanner(System.in);
+    	String firstname = input.next();
+    	String lastname = input.next();
+    System.out.println(lastname);
+    }
+    }
